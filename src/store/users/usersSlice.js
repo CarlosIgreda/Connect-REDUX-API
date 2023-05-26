@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 
 const USERS_URL = 'https://randomuser.me/api/?results=5';
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
   try {
-    const response = await axios.get(USERS_URL);
-    return response.data.results;
+    const response = await fetch(USERS_URL);
+    const data = await response.json();
+    return data.results;
   } catch (error) {
     throw new Error('Failed to fetch users.');
   }
